@@ -1,0 +1,9 @@
+[submodule "CS4900-AppSoftwareDev"]
+	path = CS4900-AppSoftwareDev
+	url = https://github.com/aidenc17/CS4900-AppSoftwareDev
+[submodule "mr-fixit-service"]
+	path = mr-fixit-service
+	url = https://github.com/WSU-kduncan/mr-fixit-service
+[submodule "mr-fixit-ui"]
+	path = mr-fixit-ui
+	url = https://github.com/WSU-kduncan/mr-fixit-ui
