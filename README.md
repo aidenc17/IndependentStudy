@@ -1,3 +1,10 @@
+# TODO
+how test cases are formed DOCUMENTATION. in range, out range, wayyy out range
+
+express JS, node JS or react, testing enviourment?
+mockito, how to use what to test, tuning gen AI for testing suites
+
+
 # WSU Campus Maintenance System - Complete Documentation
 
 A comprehensive campus maintenance work order management system built for Wright State University, consisting of three main components: a Docker-based database, a Spring Boot backend service, and an Angular frontend application.
