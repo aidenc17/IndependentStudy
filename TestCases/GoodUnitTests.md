@@ -40,6 +40,28 @@ Example scenario: Testing a function that formats phone numbers - verify it corr
 #### 2. Edge Case Testing
 Test the boundaries of valid input ranges. These are technically valid but represent extremes.
 
+#### 3. Testing the Boundaries
+Testing functions should explicitly test:
+- The minimum valid value
+- The maximum valid value
+- One value just below the minimum 
+- One value just above the maximum
+
+#### 4. Invalid Input Testing
+Test how the function handles completely inaccurate input that is out of bounds
+
+Things like: 
+- Passing a string when a number is expected
+- Passing negative numbers when only positive are valid
+- Passing the wrong data type entirely
+
+#### 5. Null/Empty/Missing Input Testing
+Test how the function handles absence of data:
+- Null values
+- Empty strings
+- Empty collections (arrays, lists, dictionaries)
+- Zero-length inputs
+- Missing object properties
 ## Resources 
 (https://www.vogella.com/tutorials/JUnit/article.html)[JUnit Testing]
 https://www.jetbrains.com/help/clion/unit-testing-tutorial.html[Unit Testing Tutorial]
