@@ -132,7 +132,7 @@ You're working on smaller projects that don't need sophisticated features
 You want fine-grained control over your test configuration
 
 
-## Dependancy Injections? 
+## Dependency Injections? 
 
 - When objects are created 
 - Getter, setter, 
