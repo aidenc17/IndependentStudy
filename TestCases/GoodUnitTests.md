@@ -63,10 +63,10 @@ Test how the function handles absence of data:
 - Zero-length inputs
 - Missing object properties
 ## Resources 
-[https://www.vogella.com/tutorials/JUnit/article.html](JUnit Testing)
+[JUnit Testing](https://www.vogella.com/tutorials/JUnit/article.html)
 
 
-[https://www.jetbrains.com/help/clion/unit-testing-tutorial.html](Unit Testing Tutorial)
+[Unit Testing Tutoria](https://www.jetbrains.com/help/clion/unit-testing-tutorial.html)
 
 
-[https://nicolecarpenter.github.io/2016/03/17/clean-code-chapter-9-unit-tests.html](Clean Code)
+[Clean Code](https://nicolecarpenter.github.io/2016/03/17/clean-code-chapter-9-unit-tests.html)
