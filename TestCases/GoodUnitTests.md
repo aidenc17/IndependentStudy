@@ -19,6 +19,26 @@ Each test should stand alone:
 - Each test sets up its own data
 - Tests clean up after themselves
 
+## Ways to Test Functions
+
+### The AAA Pattern (Arrange-Act-Assert)
+Structure every test in three phases:
+
+**Arrange:** Set up the test data and preconditions. Create the inputs you'll pass to the function.
+
+**Act:** Execute the function being tested with those inputs.
+
+**Assert:** Verify the output matches expectations.
+
+### Test Categories
+
+#### 1. Correct Path Testing
+Test the most common, expected use case with valid, typical input. This verifies the function works for the scenario it was designed for.
+
+Example scenario: Testing a function that formats phone numbers - verify it correctly formats a standard 10-digit phone number.
+
+#### 2. Edge Case Testing
+Test the boundaries of valid input ranges. These are technically valid but represent extremes.
 
 ## Resources 
 (https://www.vogella.com/tutorials/JUnit/article.html)[JUnit Testing]
