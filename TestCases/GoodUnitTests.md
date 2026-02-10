@@ -80,6 +80,63 @@ Test how the function handles absence of data:
 - When you discover a bug
 - New features 
 - Changing whole functions or refactoring
+
+
+## Testing Suites  
+ ### Jest
+
+Best for: React, Node.js, TypeScript, Angular, Vue
+
+Popularity: Most widely used JavaScript testing framework, 16+ million weekly downloads
+Key Features:
+
+Zero configuration for most projects - works immediately with React, TypeScript, Node, Angular, Vue
+Built-in code coverage reporting with no additional setup
+Snapshot testing for UI components
+Parallel test execution for faster performance
+Auto-mocking of imported libraries
+Rich API that doesn't require additional assertion libraries
+Time mocking system for fast-forwarding timeouts
+Excellent documentation and largest community support
+
+When to Choose Jest:
+
+- You're working with React (it's the preferred framework)
+- You want an all-in-one solution without assembling multiple tools
+- You need snapshot testing for UI components
+- You value strong community support and extensive resources
+- You want fast test execution with built-in parallelization
+
+ ### Mocha
+Best for: Flexible testing with custom assertion libraries
+
+
+Popularity: Second most popular, used by 30%+ of JavaScript developers
+
+Key Features:
+
+- Minimal and lightweight - only provides test structure
+- Highly configurable and extensible
+- Supports both synchronous and asynchronous testing
+- Multiple reporters for different output formats
+- Works with any assertion library (Chai is most popular)
+- Browser and Node.js support
+- Simple syntax for smaller projects
+
+When to Choose Mocha:
+
+You want maximum flexibility in choosing your testing tools
+You prefer to assemble your own testing stack
+You need specific assertion libraries or mocking frameworks
+You're working on smaller projects that don't need sophisticated features
+You want fine-grained control over your test configuration
+
+
+## Dependancy Injections? 
+
+- When objects are created 
+- Getter, setter, 
+
 ## Resources 
 [JUnit Testing](https://www.vogella.com/tutorials/JUnit/article.html)
 
