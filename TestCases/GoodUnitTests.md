@@ -62,11 +62,29 @@ Test how the function handles absence of data:
 - Empty collections (arrays, lists, dictionaries)
 - Zero-length inputs
 - Missing object properties
+
+## Testing Do's
+- Write tests for every public function or method
+- Test the valid input first, then edge cases
+- Always test boundary values explicitly
+- Test one behavior per test
+- Use descriptive test names
+- Keep tests simple and readable
+- Make tests independent of each other
+- Run tests frequently during development
+- Update tests when requirements change
+
+
+## When to Write Tests
+
+- When you discover a bug
+- New features 
+- Changing whole functions or refactoring
 ## Resources 
 [JUnit Testing](https://www.vogella.com/tutorials/JUnit/article.html)
 
 
-[Unit Testing Tutoria](https://www.jetbrains.com/help/clion/unit-testing-tutorial.html)
+[Unit Testing Tutorial](https://www.jetbrains.com/help/clion/unit-testing-tutorial.html)
 
 
 [Clean Code](https://nicolecarpenter.github.io/2016/03/17/clean-code-chapter-9-unit-tests.html)
