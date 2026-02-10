@@ -18,3 +18,9 @@ Each test should stand alone:
 - No shared state between tests
 - Each test sets up its own data
 - Tests clean up after themselves
+
+
+## Resources 
+(https://www.vogella.com/tutorials/JUnit/article.html)[JUnit Testing]
+https://www.jetbrains.com/help/clion/unit-testing-tutorial.html[Unit Testing Tutorial]
+https://nicolecarpenter.github.io/2016/03/17/clean-code-chapter-9-unit-tests.html[Clean Code]
