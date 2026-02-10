@@ -16,6 +16,9 @@ A comprehensive campus maintenance work order management system built for Wright
 - [Complete Setup Guide](#complete-setup-guide)
 - [Development Workflow](#development-workflow)
 - [Troubleshooting](#troubleshooting)
+- [Additional Resources](#additional-resources)
+- [Team & Support](#team--support)
+
 
 ---
 
