@@ -7,3 +7,6 @@
 [submodule "mr-fixit-ui"]
 	path = mr-fixit-ui
 	url = https://github.com/WSU-kduncan/mr-fixit-ui
+[submodule "SP26_CS3800_Class_Demo"]
+	path = SP26_CS3800_Class_Demo
+	url = https://github.com/aidenc17/SP26_CS3800_Class_Demo
