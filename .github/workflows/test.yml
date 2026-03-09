@@ -1,0 +1,13 @@
+name: Run Tests
+# dictates when to run this workflow 
+on:
+ push:
+    branches: [ main, develop ]  # runs on push to main or develop, WHAT IS STANDARD?
+ pull_request:
+    branches: [ main, develop ]  # run on PRs to main or develop, WHAT IS STANDARD?
+
+# jobs to run when the workflow is triggered
+jobs:
+  test:
+    # what OS is it going to use 
+    runs-on: ubuntu-latest
