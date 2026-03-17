@@ -6,6 +6,8 @@ on:
   push:
     # only runs when pushing to main
     branches: [ main ]
+  # allows you to manually trigger the workflow from the GitHub Actions tab without pushing
+  workflow_dispatch:
 
 # jobs to run when the workflow is triggered
 jobs:
