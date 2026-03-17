@@ -5,7 +5,7 @@ name: Run Tests
 on:
   push:
     # only runs when pushing to main
-    branches: [ main ]
+    branches: [ main, develop ] # testing off one is "okay" for now becasue its just me but later tho it wont make sense 
   # allows you to manually trigger the workflow from the GitHub Actions tab without pushing
   workflow_dispatch:
 
