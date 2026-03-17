@@ -1,13 +1,38 @@
+# name of the workflow shown in the GitHub Actions tab
 name: Run Tests
-# dictates when to run this workflow 
+
+# dictates when to run this workflow
 on:
- push:
-    branches: [ main, develop ]  # runs on push to main or develop, WHAT IS STANDARD?
- pull_request:
-    branches: [ main, develop ]  # run on PRs to main or develop, WHAT IS STANDARD?
+  push:
+    # only runs when pushing to main
+    branches: [ main ]
 
 # jobs to run when the workflow is triggered
 jobs:
+  # test: is the job id, its how github identifies this job, can be anything (ex: build, lint, test)
   test:
-    # what OS is it going to use 
+    # what OS is it going to use
     runs-on: ubuntu-latest
+
+    # steps: is the list of tasks that run sequentially inside this job, each step runs one after the other
+    steps:
+      # clones your repo onto the runner so the job can actually see your files
+      - name: Checkout code
+        # actions/checkout is a github provided action, @v4 is the version of it we are using
+        uses: actions/checkout@v4
+
+      # tells the runner which version of node to use, without this node might not exist on the runner at all
+      - name: Setup Node.js
+        # actions/setup-node is a github provided action that installs node onto the runner
+        uses: actions/setup-node@v4
+        with:
+          # specifies node version 20, the with: block passes options into the action
+          node-version: 20
+
+      # reads package.json and installs everything listed under dependencies and devDependencies
+      - name: Install dependencies
+        run: npm install
+
+      # runs whatever script is defined under "test" in your package.json scripts
+      - name: Run tests
+        run: npm test
