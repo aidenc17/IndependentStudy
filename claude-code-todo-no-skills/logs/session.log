@@ -1,0 +1,56 @@
+=== SESSION START: 2026-04-14T00:00:00Z ===
+Model: claude-sonnet-4-6
+Task: Build full-stack Todo application from scratch per PRD in CLAUDE.md
+Working Directory: /Users/aidencox/git/IndependentStudy/claude-code-todo-no-skills/
+Usage: 24% of daily refresh
+--- Actions ---
+[2026-04-14] Entered plan mode. Explored existing reference projects:
+  - claude-code-todo/ (React+Vite frontend, Express+MongoDB+JWT backend)
+  - SP26_CS3800_Class_Demo/ (Express+Sequelize+MySQL, controllers/services pattern)
+  - SP26_CS3800_Class_Demo_Front_End/ (React 19+Vite, AuthContext pattern)
+
+[2026-04-14] Plan approved. Architecture:
+  Backend: Node.js + Express + MongoDB + Mongoose + JWT + bcryptjs
+  Frontend: React + Vite + AuthContext + localStorage session persistence
+
+[2026-04-14] Created logs/session.log (this file)
+
+--- Building backend ---
+[2026-04-14] Created backend files:
+  - backend/package.json (express, mongoose, jsonwebtoken, bcryptjs, cors, dotenv, nodemon)
+  - backend/.env (MONGO_URI, JWT_SECRET, PORT=5000)
+  - backend/models/User.js (username, email, hashed password, timestamps)
+  - backend/models/Todo.js (userId ref, title, description, completed, timestamps)
+  - backend/middleware/auth.js (JWT Bearer token verification)
+  - backend/routes/auth.js (POST /api/auth/register, POST /api/auth/login)
+  - backend/routes/todos.js (GET/POST/PUT/DELETE /api/todos — all protected)
+  - backend/app.js (Express setup, CORS for localhost:5173, routes)
+  - backend/server.js (Mongoose connect, app.listen on PORT)
+[2026-04-14] npm install backend: 133 packages, 0 vulnerabilities
+[2026-04-14] node --check syntax: All backend files OK
+
+--- Building frontend ---
+[2026-04-14] Created frontend files:
+  - frontend/package.json (react 18, react-dom, vite, @vitejs/plugin-react)
+  - frontend/vite.config.js (proxy /api → localhost:5000)
+  - frontend/index.html
+  - frontend/src/main.jsx (ReactDOM.createRoot)
+  - frontend/src/App.jsx (AuthProvider wrapper, state-based routing, useEffect with [] — bug fixed)
+  - frontend/src/context/AuthContext.jsx (isLoggedIn, user, token, login, logout, getHeaders)
+  - frontend/src/utils/auth.js (localStorage token/user helpers)
+  - frontend/src/components/Navbar.jsx (dynamic nav — logged in/out)
+  - frontend/src/pages/Home.jsx
+  - frontend/src/pages/About.jsx
+  - frontend/src/pages/Login.jsx (form with loading/error states)
+  - frontend/src/pages/Register.jsx (form with loading/error states, pw validation)
+  - frontend/src/pages/Todos.jsx (full CRUD: add, toggle, edit, delete, loading/error)
+[2026-04-14] npm install frontend: 62 packages, 2 moderate vulns (Vite dev deps — not runtime)
+
+--- Status ---
+[2026-04-14] All files created and dependencies installed.
+To run:
+  Backend:  cd backend && npm start  (requires local MongoDB on port 27017)
+  Frontend: cd frontend && npm run dev  (Vite on localhost:5173)
+
+=== SESSION END: 2026-04-14T00:00:00Z | All tasks completed ===
+
