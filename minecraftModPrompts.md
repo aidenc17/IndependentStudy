@@ -50,5 +50,30 @@ The build failure is a Loom/network issue — Gradle needs to download Minecraft
   skeleton is written and committed. Next: add the C2S network packet so commands
   actually execute on the server. (disable recaps in /config)
 
+---
+ To test in Prism Launcher right now:
+
+  1. Create a new instance in Prism → Minecraft 26.1.2 (enable snapshots in settings),
+  Loader: Fabric 0.18.6
+  2. Add Fabric API — in the instance's Mods tab, click Download mods → search "Fabric
+  API" → install 0.145.4+26.1.2
+  3. Add your mod jar — in the Mods tab, click Add from file → navigate to:
+  /Users/aidencox/git/systemOS/build/libs/systemos-1.0.0.jar
+  4. Launch the instance, create a Creative world
+  5. Open the Functional Blocks creative tab → you'll see "Computer"
+  6. Place it, right-click → terminal opens. You can type but commands won't execute yet
+   (networking step is next)
+
+  ---
+  Alternatively, if you want to skip Prism setup for now, ./gradlew runClient should
+  also work since Loom already downloaded everything. That launches a dev client
+  directly.
+
+  What's next after you verify it loads: the networking packets (C2S command → server
+  executes shell → S2C output back to screen). That's the last piece before all the
+  commands actually work.
+
+✻ Churned for 15m 56s · 2 shells still running
+
 
 
