@@ -76,4 +76,19 @@ The build failure is a Loom/network issue — Gradle needs to download Minecraft
 ✻ Churned for 15m 56s · 2 shells still running
 
 
+Prompt after it said the mod would work: 
+ have you added everything to that log file? i want everyhting that you can think of
+  in that file. i will be showing it to people so i want to know all of your thought
+  process.
+
+  Changed log file after that ^^
+
+
+Tried to launch game, it failed. pasted output of game crashing to claude. Had to deal with block ID not beign set before launch. 
+
+After noticing it, claude took time go back in and check, then gave a new jar file.
+
+Functional after about 2-3 hours of actual work. typing the e key wants to close the inventory, but those minor bugs will get ironed out eventually.
+
+
 
