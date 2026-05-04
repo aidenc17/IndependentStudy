@@ -4,9 +4,9 @@ A practical guide to writing Product Requirements Documents that actually produc
 
 ---
 
-## Why this matters
+## Why it matters
 
-A PRD written for a human teammate assumes shared context, judgment about edge cases, and the ability to ask follow-up questions over a week of Slack threads. A PRD written for an AI agent assumes none of that. The agent has exactly what's in the document plus what it can see in the repo. Ambiguity in the PRD becomes either (a) the agent guessing wrong and confidently shipping broken code, or (b) the agent stopping every 30 seconds to ask clarifying questions.
+A PRD (Project Requirements Document) written for a human teammate assumes shared context, judgment about edge cases, and the ability to ask follow-up questions. A PRD written for an AI agent assumes none of that. The agent has exactly what's in the document plus what it can see in the repo. Ambiguity in the PRD becomes either (a) the agent guessing wrong and confidently shipping broken code, or (b) the agent stopping every 30 seconds to ask clarifying questions.
 
 The goal is a document specific enough that a competent agent can execute end-to-end, while still leaving room for the agent to make sensible local decisions.
 
@@ -16,15 +16,15 @@ The goal is a document specific enough that a competent agent can execute end-to
 
 ### 1. Context block (the "why")
 
-Two or three paragraphs at the top. What problem are we solving? Who is it for? What's the current state? What does success look like? The agent uses this to break ties when the spec is ambiguous — if it knows you're optimizing for "TA grading throughput on a Linux box," it won't propose a cloud-hosted React Native app.
+Two or three paragraphs at the top. What problem are we solving? Who is it for? What's the current state? What does success look like? The agent uses this to break ties when the spec is ambiguous. If the AI knows you're optimizing for "TA grading throughput on a Linux box," it won't propose a cloud-hosted React Native app.
 
 ### 2. Scope, with explicit non-goals
 
-A bulleted list of what's in scope and a separate list of what's out of scope. The non-goals list is the more important of the two. AI agents are eager beavers — without a non-goals list, you'll get authentication, dark mode, i18n, a settings panel, and analytics on a ticket that asked for a CSV exporter.
+A bulleted list of what's in scope and a separate list of what's out of scope. The non-goals list is the more important of the two. AI agents are eager junior devs. Without a non-goals list, you'll get authentication, dark mode, a settings panel.
 
 ### 3. Functional requirements as testable statements
 
-Not "the system should handle errors gracefully" — that's a vibe, not a requirement. Instead: "If the input file is not valid UTF-8, the program writes the offending byte offset to stderr and exits with code 2." Each requirement should map cleanly to a test case.
+Not "the system should handle errors gracefully". That's a vibe, not a requirement. Instead: "If the input file is not valid, the program writes the offending byte offset to stderr and exits with code 2." Each requirement should map cleanly to a test case.
 
 ### 4. Tech stack and constraints
 
@@ -52,7 +52,7 @@ A short list of things you haven't decided. Tells the agent: pause and ask befor
 
 **Conflicting requirements.** "Must be fully type-safe" and "use this dynamic plugin system" in the same doc. The agent will pick one and silently violate the other. Resolve conflicts before handing off.
 
-**Implementation dictated, but incompletely.** "Use Redis for caching" with no schema, no key naming convention, no TTL policy. Either fully specify or leave the choice to the agent — half-specifying is worse than not specifying.
+**Implementation dictated, but incompletely.**  Don't have no schema, no key naming convention, no TTL policy. Either fully specify or leave the choice to the agent. Half-specifying is worse than not specifying.
 
 **No examples.** A spec without at least one worked example (sample input, sample output) leaves too much room. Even a 3-line example resolves dozens of ambiguities.
 
@@ -62,21 +62,21 @@ A short list of things you haven't decided. Tells the agent: pause and ask befor
 
 ## The Ugly: things that look fine until they bite you
 
-**Implicit environment assumptions.** "Read the config from the usual place." Whose usual? `~/.config/app/`? `/etc/app.conf`? An env var? The agent will pick one and you'll discover the mismatch in production.
+**Implicit environment assumptions.** "Read the config from the usual place." What's usual? `~/.config/app/`? `/etc/app.conf`? An env var? The agent will pick one and you'll discover the mismatch in production.
 
 **Stale context.** PRD references "the existing auth system" but the auth system was rewritten three months ago. The agent reads the PRD, looks at the repo, sees a mismatch, and picks one. Refresh the PRD against the actual code before handing it off.
 
 **Missing failure modes.** What happens on network timeout? Partial writes? Concurrent runs? If the PRD doesn't say, the agent invents behavior, and that behavior probably isn't what you want.
 
-**Over-specifying the solution, under-specifying the problem.** Telling the agent the exact 14 functions to write is brittle — if assumption #3 is wrong, all 14 are wrong. Specify the problem and the contracts; let the agent solve within those constraints.
+**Over-specifying the solution, under-specifying the problem.** Telling the agent the exact 14 functions to write is brittle. if assumption #3 is wrong, all 14 are wrong. Specify the problem and the contracts; let the agent solve within those constraints.
 
-**No log of decisions.** Three sessions in, you've forgotten that you told the agent to use SQLite instead of Postgres, and the agent has forgotten too because you started a new session. See the `.claude/` setup below.
+**No log of decisions.** Three sessions in, you've forgotten that you told the agent to use SQLite instead of Postgres, and the agent has forgotten too because you started a new session. Look into `.claude`.
 
 ---
 
 ## Things to look out for during execution
 
-- **Scope creep in the agent's output.** It built the thing — and three other things. Cut them. Don't merge "while I was in there" extras without review.
+- **Scope creep in the agent's output.** It built the thing. And three other things. Cut them. Don't merge "while I was in there" extras without review.
 - **Confident hallucinations of APIs.** The agent calls a function that doesn't exist on the library version you're using. Always run the code, not just read it.
 - **Silent constraint violations.** Asked for no external dependencies, got a 40-line `package.json`. Diff against expectations.
 - **Tests that test the implementation, not the requirement.** The agent writes tests that pass because they assert what the code does, not what the spec says. Spot-check tests against the PRD acceptance criteria.
@@ -183,5 +183,3 @@ End each session with: "Append a LOG.md entry covering what you did, what's next
 6. Have I resolved the obvious internal contradictions?
 7. Is the `.claude/` directory set up and current?
 8. Have I told the agent how to log its work?
-
-If you can answer yes to all eight, you're in good shape. If you can't, fix that before you spend tokens on code that's going to be wrong in interesting ways.
