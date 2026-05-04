@@ -54,3 +54,45 @@ To run:
 
 === SESSION END: 2026-04-14T00:00:00Z | All tasks completed ===
 
+=== SESSION START: 2026-04-21T00:00:00Z ===
+Model: claude-sonnet-4-6
+Task: Add password reset (console token) + admin panel
+Working Directory: /Users/aidencox/git/IndependentStudy/claude-code-todo-no-skills/
+
+--- Plan (approved) ---
+[2026-04-21] Entered plan mode. Explored all backend + frontend files.
+[2026-04-21] Plan approved:
+  - Password reset: forgot-password → console token → validate → reset-password
+  - Admin panel: user list, toggle admin, delete user
+  - Bootstrap endpoint to create first admin via ADMIN_SECRET
+
+--- Backend changes ---
+[2026-04-21] Modified backend/models/User.js: added isAdmin (Boolean), resetPasswordToken (String), resetPasswordExpires (Date)
+[2026-04-21] Modified backend/routes/auth.js: added crypto import + hashToken helper; added POST /api/auth/forgot-password, POST /api/auth/validate-reset-token, POST /api/auth/reset-password; register+login now return isAdmin in user object
+[2026-04-21] Created backend/middleware/adminAuth.js: DB lookup to verify isAdmin, attaches req.fullUser
+[2026-04-21] Created backend/routes/admin.js: POST /bootstrap, GET /users (with todo counts), PUT /users/:id/toggle-admin, DELETE /users/:id
+[2026-04-21] Modified backend/app.js: mounted /api/admin routes
+[2026-04-21] Modified backend/.env: added ADMIN_SECRET=changeme_admin_secret
+[2026-04-21] node --check: All backend files OK
+
+--- Frontend changes ---
+[2026-04-21] Created frontend/src/pages/ForgotPassword.jsx: email form → success state with console instructions
+[2026-04-21] Created frontend/src/pages/ResetPassword.jsx: token + new password + confirm; validates token before reset
+[2026-04-21] Created frontend/src/pages/AdminPanel.jsx: user table with toggle admin / delete actions; self-protection (disabled on own row)
+[2026-04-21] Modified frontend/src/App.jsx: imported 3 new pages; added switch cases forgot-password, reset-password, admin
+[2026-04-21] Modified frontend/src/components/Navbar.jsx: Admin nav link shown when user.isAdmin === true
+[2026-04-21] Modified frontend/src/pages/Login.jsx: added "Forgot password?" link to setCurrentPage('forgot-password')
+
+--- Issues / Notes ---
+[2026-04-21] No issues. crypto is Node built-in (no install needed).
+[2026-04-21] Admin bootstrap: POST /api/admin/bootstrap { email, adminSecret } — works only when zero admins exist
+
+[2026-04-21] Created backend/server.demo.js: standalone in-memory server, no MongoDB needed
+  - Pre-seeded: admin@demo.com/admin123 (admin), user@demo.com/user123 (regular)
+  - All auth + todo + admin routes implemented inline
+  - Data resets on restart (in-memory only)
+[2026-04-21] Modified backend/package.json: added "demo": "node server.demo.js" script
+[2026-04-21] node --check server.demo.js: OK
+
+=== SESSION END: 2026-04-21T00:00:00Z | All tasks completed ===
+

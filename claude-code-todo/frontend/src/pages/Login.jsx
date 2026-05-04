@@ -9,6 +9,20 @@ export default function Login({ onNavigate }) {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  async function handleDevLogin() {
+    setError('');
+    setLoading(true);
+    try {
+      const { token, user } = await loginUser('admin@demo.com', 'admin123');
+      login(token, user);
+      onNavigate('todos');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
@@ -54,6 +68,17 @@ export default function Login({ onNavigate }) {
             {loading ? 'Logging in…' : 'Log In'}
           </button>
         </form>
+        <p className="auth-switch">
+          <button className="link-btn" onClick={() => onNavigate('forgot-password')}>
+            Forgot password?
+          </button>
+        </p>
+        <div className="dev-login-banner">
+          <span>Dev mode?</span>
+          <button className="btn btn-sm btn-secondary" onClick={handleDevLogin} disabled={loading}>
+            Login as Admin
+          </button>
+        </div>
         <p className="auth-switch">
           Don't have an account?{' '}
           <button className="link-btn" onClick={() => onNavigate('register')}>

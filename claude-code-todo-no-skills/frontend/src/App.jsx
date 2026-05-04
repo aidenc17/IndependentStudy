@@ -6,6 +6,9 @@ import About from './pages/About';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Todos from './pages/Todos';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
+import AdminPanel from './pages/AdminPanel';
 
 function AppContent() {
   const { isLoggedIn } = useAuth();
@@ -30,6 +33,12 @@ function AppContent() {
         return <Register setCurrentPage={setCurrentPage} />;
       case 'todos':
         return <Todos setCurrentPage={setCurrentPage} />;
+      case 'forgot-password':
+        return <ForgotPassword setCurrentPage={setCurrentPage} />;
+      case 'reset-password':
+        return <ResetPassword setCurrentPage={setCurrentPage} />;
+      case 'admin':
+        return <AdminPanel setCurrentPage={setCurrentPage} />;
       default:
         return <Home setCurrentPage={setCurrentPage} />;
     }

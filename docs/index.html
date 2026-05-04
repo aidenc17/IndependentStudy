@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Independent Study — Aiden Cox</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem 0;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        header p {
+            font-size: 1.15rem;
+            opacity: 0.9;
+        }
+
+        header .header-meta {
+            font-size: 0.95rem;
+            opacity: 0.75;
+            margin-top: 0.3rem;
+        }
+
+        /* Navigation / Tabs */
+        nav {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        nav button {
+            background: none;
+            border: none;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        nav button:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        nav button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+
+        .section {
+            background: white;
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-left: 4px solid #667eea;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .section h3 {
+            color: #555;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        /* Overview Box */
+        .overview-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .overview-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .overview-box ul {
+            list-style: none;
+            padding-left: 0.5rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.5rem;
+        }
+
+        .overview-box li {
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .overview-box li::before {
+            content: "✓";
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        /* Progress Summary */
+        .progress-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .progress-stat {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .progress-stat .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+        }
+
+        .progress-stat .stat-label {
+            font-size: 0.85rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .team-member {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            background: #667eea;
+            border-radius: 50%;
+            margin: 0 auto 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            overflow: hidden;
+            border: 4px solid #f8f9fa;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .member-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .team-member h3 {
+            color: #667eea;
+            margin-bottom: 0.3rem;
+        }
+
+        .member-role {
+            color: #764ba2;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .team-member a:hover {
+            color: #764ba2;
+            text-decoration: underline;
+        }
+
+        .member-expertise {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            text-align: left;
+            border: 1px solid #e9ecef;
+        }
+
+        .member-expertise h4 {
+            color: #667eea;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .carousel-content {
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .week-report {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .week-report.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .week-header {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .week-header h3 {
+            margin: 0;
+        }
+
+        .week-counter {
+            font-size: 0.85rem;
+            color: #999;
+            background: #f1f3f5;
+            padding: 0.2rem 0.7rem;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .carousel-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .carousel-btn:hover {
+            background: #764ba2;
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+        }
+
+        .carousel-btn:active {
+            transform: scale(0.95);
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #dee2e6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            padding: 0;
+        }
+
+        .indicator.active {
+            background: #667eea;
+            width: 30px;
+            border-radius: 6px;
+        }
+
+        .indicator:hover {
+            background: #adb5bd;
+        }
+
+        .report-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .report-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        }
+
+        .report-card h4 {
+            color: #667eea;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .report-card p, .report-card ul {
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .report-card ul {
+            padding-left: 1.2rem;
+        }
+
+        .report-card li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* Status badge */
+        .week-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .badge-break {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-milestone {
+            background: #d1e7dd;
+            color: #0a3622;
+        }
+
+        /* Footer */
+        footer {
+            background: #343a40;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            opacity: 0.85;
+            margin-bottom: 0.3rem;
+        }
+
+        footer p:last-child {
+            opacity: 0.5;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .report-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Independent Study</h1>
+            <p>CS4900 — Application Software Development</p>
+            <p class="header-meta">Aiden Cox &nbsp;·&nbsp; Wright State University &nbsp;·&nbsp; Spring 2026</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><button class="tab-btn active" data-tab="overview">Project Overview</button></li>
+                <li><button class="tab-btn" data-tab="reports">Weekly Reports</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+
+            <!-- Project Overview Section -->
+            <section id="overview" class="section active">
+                <h2>📋 Project Overview</h2>
+
+                <div class="overview-box">
+                    <h3>CS4900 — Independent Study Topics</h3>
+                    <p style="margin-bottom: 1rem;">A semester-long independent study covering the full software development lifecycle, from testing theory through CI/CD automation and AI-assisted development tools.</p>
+                    <ul>
+                        <li>Code testing suites &amp; unit test theory (Jest)</li>
+                        <li>GitHub Actions &amp; CI/CD pipelines</li>
+                        <li>Containerization with Docker &amp; MariaDB</li>
+                        <li>React frontend development</li>
+                        <li>AI-assisted development (Claude Code)</li>
+                        <li>AWS hosting &amp; orchestration</li>
+                    </ul>
+                </div>
+
+                <h3>Semester at a Glance</h3>
+                <div class="progress-summary">
+                    <div class="progress-stat">
+                        <span class="stat-number">15</span>
+                        <span class="stat-label">Weeks Completed</span>
+                    </div>
+                    <div class="progress-stat">
+                        <span class="stat-number">17+</span>
+                        <span class="stat-label">Pull Requests</span>
+                    </div>
+                    <div class="progress-stat">
+                        <span class="stat-number">3</span>
+                        <span class="stat-label">Major Deliverables</span>
+                    </div>
+                    <div class="progress-stat">
+                        <span class="stat-number">2</span>
+                        <span class="stat-label">CI/CD Workflows</span>
+                    </div>
+                </div>
+
+                <h3>Team Member</h3>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <div class="member-avatar">
+                            <img src="images/aiden.png" alt="Aiden Cox" onerror="this.style.display='none'; this.parentElement.innerHTML='AC';">
+                        </div>
+                        <h3>Aiden Cox</h3>
+                        <p class="member-role">Independent Study Student</p>
+                        <p>Email: <a href="mailto:cox.378@wright.edu">cox.378@wright.edu</a></p>
+                        <div class="member-expertise">
+                            <h4>Focus Areas</h4>
+                            <p>Testing Suites, CI/CD Pipelines, React Frontend Development, Documentation, AI-Assisted Development</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Weekly Reports Section -->
+            <section id="reports" class="section">
+                <h2>Weekly Reports</h2>
+
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" onclick="changeWeek(-1)">&#8249;</button>
+
+                    <div class="carousel-content">
+
+                        <!-- Week 1 -->
+                        <div class="week-report active">
+                            <div class="week-header">
+                                <h3>Week 1 &mdash; Jan 12, 2026</h3>
+                                <span class="week-counter">1 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <p>First meeting with instructor. Finalized the direction of the independent study and defined the semester roadmap.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Validate that the UI communicates with the API, and the API communicates with the DB. Set up a mono-repo containing all sub-repositories.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>Nothing to report — initial planning week.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 2 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 2 &mdash; Jan 19, 2026</h3>
+                                <span class="week-counter">2 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <p>Validated end-to-end communication: Angular UI → Spring Boot API → MariaDB. Initialized the mono-repo structure on GitHub.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Set up a website for easy progress reporting — weekly challenges, completed work, and next steps.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>GitHub submodules configuration, deciding where to begin with documentation, and evaluating which testing suites to use.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 3 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 3 &mdash; Jan 26, 2026 <span class="week-badge badge-break">Snow Week</span></h3>
+                                <span class="week-counter">3 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <p>Campus closed due to snow. Limited progress this week.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Continue website setup for progress reporting. Added GitHub Issues #1–#6 to track tasks.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>GitHub submodule configuration, documentation strategy, selecting and configuring a testing suite.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 4 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 4 &mdash; Feb 3, 2026</h3>
+                                <span class="week-counter">4 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <p>Completed the boilerplate progress-reporting website. Began using GitHub Issues to track and prioritize tasks.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Compare testing suites; document trade-offs between Jest, Mocha, and other frameworks across different stack layers.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>Finding credible, consistent resources — opinions on what makes a "good" test vary widely across the community.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 5 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 5 &mdash; Feb 10, 2026 <span class="week-badge badge-milestone">Milestone</span></h3>
+                                <span class="week-counter">5 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <ul>
+                                        <li>Created comprehensive testing documentation in <code>TestCases/GoodUnitTests.md</code></li>
+                                        <li>Covered unit test criteria, AAA pattern, test categories, boundary &amp; input-validation testing</li>
+                                        <li>Merged PR #10; fixed dependency typo spotted by collaborator</li>
+                                    </ul>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Move from theory to practice — begin implementing Jest test suites against the Express.js demo backend.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>Synthesizing conflicting testing philosophies and deciding which principles to prioritize when documenting guidelines.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 6 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 6 &mdash; Feb 17, 2026</h3>
+                                <span class="week-counter">6 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <p>Researched Jest configuration for ES modules. Explored CommonJS vs. ES module testing patterns. Began test-environment setup for the Express.js demo API.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Write test suites for the service and controller layers. Document ES module testing challenges and solutions.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>Jest's experimental ES module support requires specific configuration. Mock functions behave differently — must use <code>jest.unstable_mockModule()</code> instead of <code>jest.mock()</code>.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 7 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 7 &mdash; Feb 24, 2026 <span class="week-badge badge-milestone">Milestone</span></h3>
+                                <span class="week-counter">7 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <ul>
+                                        <li>Set up MySQL database with proper permissions; resolved zombie MySQL process (PID 65969) blocking socket files</li>
+                                        <li>Configured Jest with <code>--experimental-vm-modules</code> flag for ES module support</li>
+                                        <li>Created comprehensive test suites covering service, controller, and routes layers with proper mocking strategies</li>
+                                        <li>Documented troubleshooting process in <code>TROUBLESHOOTING.md</code></li>
+                                        <li>Added fork as submodule</li>
+                                    </ul>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Run and validate all test suites. Add coverage reporting. Research Docker containerization for consistent dev environments.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>Zombie MySQL process required <code>kill -9</code> and socket cleanup. ES module mocking required dynamic <code>await import()</code>. Missing env vars caused authentication failures that took time to debug.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 8 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 8 &mdash; Mar 2, 2026 <span class="week-badge badge-break">Spring Break</span></h3>
+                                <span class="week-counter">8 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <p>Spring Break — no formal deliverables this week.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>After break: GitHub Actions for automated testing, repository cleanup, website polish, and close issues for completed work.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>Nothing to report — break week.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 9 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 9 &mdash; Mar 9, 2026 <span class="week-badge badge-milestone">Milestone</span></h3>
+                                <span class="week-counter">9 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <ul>
+                                        <li>Created boilerplate GitHub Actions CI workflow (<code>.github/workflows/test.yml</code>)</li>
+                                        <li>Cleaned up Weeks 6–8 documentation and resolved lingering repository issues</li>
+                                        <li>Added completed work artifacts to the repository; fixed a typo in test case controller file</li>
+                                    </ul>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Refine the CI workflow — add manual dispatch capability, improve workflow comments, and create a develop branch strategy.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>First GitHub Actions configuration required understanding YAML syntax, job structure, and how to install dependencies in the runner environment.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 10 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 10 &mdash; Mar 17, 2026</h3>
+                                <span class="week-counter">10 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <ul>
+                                        <li>Added develop branch to the CI/CD workflow trigger conditions</li>
+                                        <li>Enabled manual workflow dispatch (<code>workflow_dispatch</code>) so tests can be triggered from the GitHub Actions UI</li>
+                                        <li>Added inline comments to the test workflow for maintainability and documentation</li>
+                                    </ul>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Begin React frontend development; document authentication patterns (bearer tokens, access/refresh token flow) for the CS3800 class demo.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>Understanding GitHub Actions event triggers and how <code>workflow_dispatch</code> integrates with push-based triggers without duplicating runs.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 11 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 11 &mdash; Mar 24, 2026 <span class="week-badge badge-milestone">Milestone</span></h3>
+                                <span class="week-counter">11 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <ul>
+                                        <li>Merged PR #17 from the <code>test-actions-acox</code> branch — integrating the complete GitHub Actions test pipeline</li>
+                                        <li>Started React frontend README on the <code>react-acox</code> branch, documenting the Vite + React 19 demo app</li>
+                                    </ul>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Continue React frontend development; document bearer token authentication patterns; finalize React app structure.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>Structuring the React README to be useful for a teaching context without over-explaining concepts students should discover themselves.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 12 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 12 &mdash; Mar 31, 2026</h3>
+                                <span class="week-counter">12 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <p>Continued React frontend research and planning. Reviewed Vite build tooling and React 19 patterns relevant to the CS3800 class demo frontend.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Implement core React demo components: authentication flow, API integration with bearer tokens, and route protection patterns.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>Deciding the appropriate scope for a teaching demo — enough complexity to be instructive, but simple enough for students new to React.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 13 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 13 &mdash; Apr 6, 2026</h3>
+                                <span class="week-counter">13 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <ul>
+                                        <li>Active development on the <code>react-acox</code> branch — building out the React + Vite class demo frontend</li>
+                                        <li>Implemented component structure for the CS3800 teaching application</li>
+                                        <li>Work-in-progress stash preserved mid-session for continuity</li>
+                                    </ul>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Finalize React demo, merge to main, and begin end-of-semester documentation and review.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>Balancing active feature development with the need to document as you go — keeping the README current with implementation changes.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 14 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 14 &mdash; Apr 13, 2026</h3>
+                                <span class="week-counter">14 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <ul>
+                                        <li>Semester review and documentation pass — ensuring all deliverables are committed and organized</li>
+                                        <li>Reviewed the full Mr. Fixit system (Angular UI, Spring Boot API, MariaDB) end-to-end</li>
+                                        <li>Prepared for final week explorations in AI-assisted development tooling</li>
+                                    </ul>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Work Planned</h4>
+                                    <p>Explore Claude Code (AI coding assistant) as a development tool — evaluate productivity impact and document findings for the independent study.</p>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Challenges</h4>
+                                    <p>Ensuring prior weeks' work is well-documented and presentable for end-of-semester review.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Week 15 -->
+                        <div class="week-report">
+                            <div class="week-header">
+                                <h3>Week 15 &mdash; Apr 15, 2026 <span class="week-badge badge-milestone">Final Week</span></h3>
+                                <span class="week-counter">15 of 15</span>
+                            </div>
+                            <div class="report-grid">
+                                <div class="report-card">
+                                    <h4>Work Completed</h4>
+                                    <ul>
+                                        <li>Explored <strong>Claude Code</strong> — Anthropic's AI-powered CLI coding assistant — as a practical development tool</li>
+                                        <li>Built two experimental Claude Code projects: a todo application (<code>claude-code-todo</code>) and a vague-prompt exploration (<code>claude-code-vague</code>)</li>
+                                        <li>Evaluated AI-assisted code generation for scaffolding, refactoring, and documentation tasks</li>
+                                        <li>Updated semester website and finalized all deliverables</li>
+                                    </ul>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Semester Summary</h4>
+                                    <ul>
+                                        <li>Comprehensive unit testing theory &amp; Jest implementation</li>
+                                        <li>GitHub Actions CI/CD pipelines (automated &amp; manual dispatch)</li>
+                                        <li>Docker containerization for consistent environments</li>
+                                        <li>React + Vite frontend development</li>
+                                        <li>AI-assisted development with Claude Code</li>
+                                    </ul>
+                                </div>
+                                <div class="report-card">
+                                    <h4>Reflections</h4>
+                                    <p>The semester progressed from testing theory to practical CI/CD automation and modern frontend development. Exploring AI-assisted tooling at the end of the semester was a forward-looking addition that highlights how development workflows are evolving.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="carousel-btn next" onclick="changeWeek(1)">&#8250;</button>
+                </div>
+
+                <div class="carousel-indicators"></div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Aiden Cox &nbsp;|&nbsp; Wright State University &nbsp;|&nbsp; CS4900 Independent Study</p>
+            <p>Spring 2026 Semester</p>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const sections = document.querySelectorAll('.section');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabName = button.getAttribute('data-tab');
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                sections.forEach(sec => sec.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabName).classList.add('active');
+            });
+        });
+
+        // Carousel
+        let currentWeek = 0;
+        const weeks = document.querySelectorAll('.week-report');
+        const totalWeeks = weeks.length;
+
+        function initCarousel() {
+            const indicatorsContainer = document.querySelector('.carousel-indicators');
+            for (let i = 0; i < totalWeeks; i++) {
+                const indicator = document.createElement('button');
+                indicator.className = 'indicator';
+                indicator.title = 'Week ' + (i + 1);
+                if (i === 0) indicator.classList.add('active');
+                indicator.onclick = () => goToWeek(i);
+                indicatorsContainer.appendChild(indicator);
+            }
+        }
+
+        function updateCarousel() {
+            weeks.forEach((week, index) => {
+                week.classList.toggle('active', index === currentWeek);
+            });
+            document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                indicator.classList.toggle('active', index === currentWeek);
+            });
+        }
+
+        function changeWeek(direction) {
+            currentWeek = (currentWeek + direction + totalWeeks) % totalWeeks;
+            updateCarousel();
+        }
+
+        function goToWeek(weekIndex) {
+            currentWeek = weekIndex;
+            updateCarousel();
+        }
+
+        document.addEventListener('DOMContentLoaded', initCarousel);
+    </script>
+</body>
+</html>

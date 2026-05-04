@@ -52,6 +52,11 @@ export default function Navbar({ currentPage, setCurrentPage }) {
             <button style={linkStyle('todos')} onClick={() => setCurrentPage('todos')}>
               Todos
             </button>
+            {user?.isAdmin && (
+              <button style={linkStyle('admin')} onClick={() => setCurrentPage('admin')}>
+                Admin
+              </button>
+            )}
             <span style={{ color: '#94a3b8', fontSize: '0.85rem', marginLeft: '8px' }}>
               {user?.username}
             </span>

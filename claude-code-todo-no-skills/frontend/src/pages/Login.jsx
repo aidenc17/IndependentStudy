@@ -119,6 +119,14 @@ export default function Login({ setCurrentPage }) {
           Register
         </span>
       </p>
+      <p style={{ marginTop: '8px', textAlign: 'center', fontSize: '0.9rem' }}>
+        <span
+          style={{ color: '#64748b', cursor: 'pointer' }}
+          onClick={() => setCurrentPage('forgot-password')}
+        >
+          Forgot password?
+        </span>
+      </p>
     </div>
   );
 }

@@ -74,3 +74,63 @@ used about 30 percent of daily limit, daily refreshes
 - **Status:** Complete — both backend and frontend built and verified
 
 ---
+
+## Session: 2026-04-21
+
+### Session Start
+- **Date/Time:** 2026-04-21
+- **Model Used:** claude-sonnet-4-6
+- **Task:** Add forgot/reset password flow (console link) + admin panel
+
+### Work Performed
+1. Read CLAUDE.md, existing codebase (all backend/frontend files)
+2. Added `isAdmin`, `resetPasswordToken`, `resetPasswordExpires` fields to User model
+3. Added `POST /api/auth/forgot-password` — generates SHA-256 hashed token, logs reset URL to server console (1hr expiry)
+4. Added `POST /api/auth/reset-password/:token` — validates hashed token, updates password, clears token fields
+5. Created `backend/middleware/admin.js` — JWT + isAdmin guard middleware
+6. Created `backend/routes/admin.js` — GET /stats, GET /users, PUT /users/:id/toggle-admin, DELETE /users/:id
+7. Registered admin routes in server.js
+8. Updated login response to include `isAdmin` in user object
+9. Created `frontend/src/pages/ForgotPassword.jsx`
+10. Created `frontend/src/pages/ResetPassword.jsx` — reads token from props (set by App.jsx URL parsing)
+11. Created `frontend/src/pages/Admin.jsx` — stats grid + users table with toggle-admin/delete actions
+12. Updated `App.jsx` — added new pages + useEffect to parse ?page=reset-password&token=xxx on load
+13. Updated `Navbar.jsx` — Admin nav link visible only to isAdmin users
+14. Updated `Login.jsx` — added "Forgot password?" link
+15. Added all required CSS classes to `index.css`
+16. Added API helpers to `utils/auth.js`
+
+### Reset Password Flow
+1. User clicks "Forgot password?" on Login page -> ForgotPassword page
+2. User enters email -> POST /api/auth/forgot-password
+3. Backend logs reset URL to console (expires 1 hour)
+4. User opens link -> App.jsx detects URL params, navigates to ResetPassword page
+5. User enters new password -> success
+
+### Admin Panel
+- Only isAdmin users see the Admin nav link
+- Stats: total users, todos, admins, completed todos
+- Users table: toggle admin, delete user+todos (self-excluded)
+- First admin must be set in MongoDB: db.users.updateOne({username:"<name>"}, {$set:{isAdmin:true}})
+
+### Issues / Notes
+- No email service — reset link is console-only by design
+- Token stored as SHA-256 hash in DB for security
+
+### Files Modified
+- backend/models/User.js, backend/routes/auth.js, backend/server.js
+- frontend/src/App.jsx, Navbar.jsx, Login.jsx, utils/auth.js, index.css
+
+### Files Created
+- backend/middleware/admin.js, backend/routes/admin.js
+- frontend/src/pages/ForgotPassword.jsx, ResetPassword.jsx, Admin.jsx
+
+### Verification
+- Backend: node --check passed on all files — 0 syntax errors
+- Frontend: vite build succeeded — 42 modules transformed, 0 errors
+
+### Session End
+- **Date/Time:** 2026-04-21
+- **Status:** Complete
+
+---

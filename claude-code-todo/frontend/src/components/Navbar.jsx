@@ -30,6 +30,14 @@ export default function Navbar({ currentPage, onNavigate }) {
             >
               Todos
             </button>
+            {user?.isAdmin && (
+              <button
+                className={currentPage === 'admin' ? 'nav-btn active' : 'nav-btn'}
+                onClick={() => onNavigate('admin')}
+              >
+                Admin
+              </button>
+            )}
             <span className="nav-user">Hi, {user?.username}</span>
             <button className="nav-btn logout-btn" onClick={handleLogout}>
               Logout
